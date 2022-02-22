@@ -16,7 +16,7 @@ export default function Header(){
           bg="primary.light"
         >
           {user && <Typography variant="displayS" color="white">
-            {user.id}
+            {user.username}
           </Typography>}
           {selectedIds.length > 0 && (
             <Button

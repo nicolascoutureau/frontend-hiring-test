@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import {login} from "../api";
 import { IUser } from "../types";
 interface AuthContextType {
-  user: IUser;
-  signin: (username: string, password: string) => void;
+  user: {id: string, username: string};
+  signin: (username: string, password: string) => Promise<any>;
   setUser: (user: IUser) => void;
 }
 

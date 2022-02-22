@@ -36,7 +36,7 @@ export const CallContextProvider: React.FC<CallContextProps> = ({
 
   useEffect(() => {
     if(!calls) return;
-    
+
     const current = calls.find(call => call.id === currentCall?.id)
 
     if (current) {
@@ -46,6 +46,7 @@ export const CallContextProvider: React.FC<CallContextProps> = ({
   }, [calls, currentCall])
 
   const updateCall = useCallback((call: ICall) => {
+    console.log('updateCall', call)
     setCalls(oldCalls => {
       return oldCalls.map(oldCall => oldCall.id === call.id ? call : oldCall);
     })
