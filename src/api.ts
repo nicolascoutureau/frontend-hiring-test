@@ -1,21 +1,23 @@
+import { IUser } from "./types";
 
 const BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
-interface IUser {
-  access_token: string;
-  refresh_token: string;
-  user: {
-    id: string;
-    username: string;
-  };
-}
-
+/**
+ * 
+ * @param data 
+ */
 function saveTokensToLocalStorage(data: IUser) {
   localStorage.setItem("access_token", data.access_token);
   localStorage.setItem("refresh_token", data.refresh_token);
   localStorage.setItem("user", JSON.stringify(data.user));
 }
 
+/**
+ * 
+ * @param username 
+ * @param password 
+ * @returns 
+ */
 export async function login(
   username: string,
   password: string
@@ -42,6 +44,10 @@ export async function login(
   }
 }
 
+/**
+ * 
+ * @returns 
+ */
 export async function refreshToken() {
   const headers = new Headers();
   headers.append("Content-Type", "application/json");
@@ -70,6 +76,13 @@ export async function refreshToken() {
   }
 }
 
+/**
+ * 
+ * @param enpoint 
+ * @param method 
+ * @param body 
+ * @returns 
+ */
 export async function request(
   enpoint: string,
   method: string,
@@ -119,10 +132,21 @@ export async function request(
   }
 }
 
+/**
+ * 
+ * @param offset 
+ * @param limit 
+ * @returns 
+ */
 export async function getCalls(offset: number, limit: number): Promise<any> {
   return await request(`calls?offset=${offset}&limit=${limit}`, "GET", null);
 }
 
+/**
+ * 
+ * @param ids 
+ * @returns 
+ */
 export async function archiveCalls(ids: string[]) {
   let promises: Promise<any>[] = [];
 
@@ -133,6 +157,11 @@ export async function archiveCalls(ids: string[]) {
   return await Promise.all(promises);
 }
 
+/**
+ * 
+ * @param id 
+ * @returns 
+ */
 export async function getCall(id: string) {
   return await request(`calls/${id}`, "GET", null);
 }

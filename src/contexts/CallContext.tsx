@@ -35,6 +35,8 @@ export const CallContextProvider: React.FC<CallContextProps> = ({
   const [hasNextPage, setHasNextPage] = useState(false);
 
   useEffect(() => {
+    if(!calls) return;
+    
     const current = calls.find(call => call.id === currentCall?.id)
 
     if (current) {
