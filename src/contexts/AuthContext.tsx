@@ -1,22 +1,10 @@
 import React, { useEffect } from "react";
 import {login} from "../api";
-
-const fakeAuthProvider = {
-  isAuthenticated: false,
-  signin(callback: VoidFunction) {
-    fakeAuthProvider.isAuthenticated = true;
-    setTimeout(callback, 100); // fake async
-  },
-  signout(callback: VoidFunction) {
-    fakeAuthProvider.isAuthenticated = false;
-    setTimeout(callback, 100);
-  },
-};
-
+import { IUser } from "../types";
 interface AuthContextType {
-  user: any;
-  signin: any,
-  setUser: any
+  user: IUser;
+  signin: (username: string, password: string) => void;
+  setUser: (user: IUser) => void;
 }
 
 let AuthContext = React.createContext<AuthContextType>(null!);
